@@ -8,7 +8,7 @@ import crypto from "crypto";
 import { fileURLToPath } from "url";
 import { iniciarConexion } from "./db.js";
 import { configurarRutas } from "./routes/productos.routes.js";
-import env from "dotenv";
+import dotenv from "dotenv";
 
 dotenv.config();
 

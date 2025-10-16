@@ -8,6 +8,9 @@ import crypto from "crypto";
 import { fileURLToPath } from "url";
 import { iniciarConexion } from "./db.js";
 import { configurarRutas } from "./routes/productos.routes.js";
+import env from "dotenv";
+
+dotenv.config();
 
 // 🔧 Compatibilidad __dirname (porque en ESM no existe por defecto)
 const __filename = fileURLToPath(import.meta.url);
@@ -23,7 +26,7 @@ servidor.use(cors());
 // ============================================================
 servidor.use(
   session({
-    secret: env.process.SECRET,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false, maxAge: 3600000 },
@@ -35,7 +38,7 @@ servidor.use(
 // ============================================================
 
 // Hash SHA-256 de 'admin123'
-const ADMIN_PASSWORD_HASH = env.process.ADMIN_PASSWORD_HASH;
+const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH;
 
 function isAuthenticated(req, res, next) {
   if (req.session.isAuthenticated) {
